@@ -171,10 +171,56 @@ background: url('https://c4.wallpaperflare.com/wallpaper/513/407/637/kakegurui-j
             ʚଓ lana ꒰: EST. 2026
         </div>
 
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: url('yumeko.jpg') no-repeat center center/cover;
+    font-family: Arial, sans-serif;
+}
 
-<!-- Elfsight Audio Player | Untitled Audio Player -->
-<center><script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-99316ccb-0205-4288-91b5-3ed8c8aee9fd" data-elfsight-app-lazy></div></center>
+/* Player kutusu */
+.player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 260px;
+    background: #0b0b0b;
+    border: 2px solid #ff0000;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255,0,0,0.6);
+    overflow: hidden;
+}
+
+/* Başlık */
+.player-header {
+    background: #ff0000;
+    color: #fff;
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* iframe */
+.player iframe {
+    width: 100%;
+    height: 150px;
+    border: none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="player">
+    <div class="player-header">🎵 Now Playing</div>
+
+    <iframe 
+        src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID">
+    </iframe>
+    
+</style>
+
 
         
     </div>
