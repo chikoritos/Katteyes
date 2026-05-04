@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ʚଓ lana ꒰:</title>
+    <style>
+        :root {
+            --primary-red: #8b0000;
+            --deep-black: #0a0a0a;
+            --accent-gold: #d4af37;
+            --text-white: #f5f5f5;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--deep-black);
+           
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+background: url('https://c4.wallpaperflare.com/wallpaper/513/407/637/kakegurui-jabami-yumeko-anime-girls-wallpaper-preview.jpg');
+   background-size: cover;        /* Ekranı tamamen doldurur (en önemli kısım) */
+    background-repeat: no-repeat; /* Resmin tekrar etmesini engeller */
+    background-position: center;  /* Resmi tam ortalar */
+    background-attachment: fixed; /* Sayfa kaysa bile resim sabit kalır */        
+        }
+
+        /* Arka Plan Efekti (İskambil Kağıtları Simgeleri) */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            font-size: 5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            background: rgba(15, 15, 15, 0.8);
+            padding: 40px 60px;
+            border-radius: 20px;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 1), 0 0 15px rgba(139, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            max-width: 400px;
+            width: 90%;
+   margin-right: auto;
+    margin-left: 5%;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-red);
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease;
+            filter: grayscale(20%) contrast(110%);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px var(--primary-red);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 10px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-white);
+            text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.8);
+        }
+
+        p {
+            font-style: italic;
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-btn {
+            text-decoration: none;
+            color: var(--text-white);
+            background: linear-gradient(45deg, #1a1a1a, #000);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--primary-red);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn:hover {
+            background: var(--primary-red);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+        }
+
+        /* Küçük Detay: Kart Simgesi */
+        .link-btn::after {
+            content: '♠';
+            position: absolute;
+            right: 15px;
+            opacity: 0.2;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: var(--primary-red);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-pattern">
+        ♠ ♥ ♣ ♦ ♠ ♥ ♣ ♦ ♠ ♥ ♣ ♦ ♠ ♥ ♣ ♦ ♠ ♥ ♣ ♦ ♠ ♥ ♣ ♦ ♠ ♥ ♣ ♦ 
+    </div>
+
+    <div class="container">
+        <!-- PROFILE PHOTO -->
+        <img src="https://static0.cbrimages.com/wordpress/wp-content/uploads/2026/02/kakegurui-yumeko-jabami-meme.jpeg" alt="Yumeko" class="profile-img">
+        
+        <h1>ʚଓ lana ꒰:</h1>
+        <p>"Let’s gamble until we go mad!"</p>
+
+        <div class="links">
+            <a href="#" class="link-btn">Discord</a>
+            <a href="#" class="link-btn">Instagram</a>
+            <a href="#" class="link-btn">Steam</a>
+            <a href="#" class="link-btn">Playlist</a>
+        </div>
+
+        <div class="footer">
+            CHIKORITOS EST. 2026
+        </div>
+    </div>
+
+</body>
+</html>
