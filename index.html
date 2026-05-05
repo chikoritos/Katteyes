@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ʚଓ lana ꒰:</title>
     <style>
+        <script src="script.js"></script>
         :root {
             --primary-red: #8b0000;
             --deep-black: #0a0a0a;
@@ -360,6 +361,77 @@ document.onmouseup=reEnable
         }, 1000);
     }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main">
+    
+    <!-- Üst Kısım: Şarkı Sayısı ve Menü İkonu -->
+    <p id="logo"><i class="fa fa-music"></i></p>
+
+    <!-- Orta Kısım: Albüm Görseli -->
+    <div class="left">
+        <img id="track_image">
+    </div>
+
+    <!-- Sağ Kısım: Kontroller ve Bilgiler -->
+    <div class="right">
+        <div class="show_song_no">
+            <p id="present">1</p>
+            <p>/</p>
+            <p id="total">5</p>
+        </div>
+
+        <!-- Şarkı İsmi ve Sanatçı -->
+        <p id="title">title</p>
+        <p id="artist">artist name</p>
+
+        <!-- Oynatma Kontrolleri (Geri, Oynat/Duraklat, İleri) -->
+        <div class="middle">
+            <button onclick="previous_song()" id="pre"><i class="fa fa-step-backward"></i></button>
+            <button onclick="justplay()" id="play"><i class="fa fa-play"></i></button>
+            <button onclick="next_song()" id="next"><i class="fa fa-step-forward"></i></button>
+        </div>
+
+        <!-- Süre ve İlerleme Çubuğu -->
+        <div class="duration">
+            <input type="range" min="0" max="100" value="0" id="duration_slider" onchange="change_duration()">
+        </div>
+
+        <!-- Ses Seviyesi Kontrolü -->
+        <div class="volume">
+            <p id="volume_show">90</p>
+            <i class="fa fa-volume-up" id="volume_icon" onclick="mute_sound()"></i>
+            <input type="range" min="0" max="100" value="90" id="volume" onchange="volume_change()">
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     
 
