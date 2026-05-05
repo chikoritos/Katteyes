@@ -197,7 +197,115 @@ document.onmouseup=reEnable
 </script>
 <body onkeydown="return false">
 
+<style>
+    /* Fixed Positioning to bypass body restrictions */
+    .fixed-player-wrapper {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+    }
 
+    .mini-oval-player {
+        background: #111;
+        width: 160px; /* Slightly smaller for a true 'mini' feel */
+        height: 40px;
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        border: 1px solid #ff0000;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7), inset 0 0 5px rgba(255, 0, 0, 0.2);
+        padding: 0 10px;
+    }
+
+    .player-btn {
+        background: none;
+        border: none;
+        color: #ff0000;
+        cursor: pointer;
+        font-size: 16px;
+        text-shadow: 0 0 8px #ff0000;
+        transition: transform 0.2s, text-shadow 0.2s;
+        outline: none;
+    }
+
+    .player-btn:hover { 
+        transform: scale(1.2); 
+        text-shadow: 0 0 12px #ff0000;
+    }
+
+    #mini-progress {
+        width: 30px;
+        height: 2px;
+        background: #333;
+        border-radius: 2px;
+    }
+
+    #mini-fill {
+        width: 0%;
+        height: 100%;
+        background: #f00;
+        box-shadow: 0 0 5px #f00;
+    }
+</style>
+
+<div class="fixed-player-wrapper">
+    <div class="mini-oval-player">
+        <!-- Added 'autoplay' attribute here -->
+        <audio id="mini-audio" src="YOUR_URL_HERE" autoplay></audio>
+        
+        <button class="player-btn" onclick="togglePlay()" id="p-btn">Ⅱ</button>
+        <div id="mini-progress"><div id="mini-fill"></div></div>
+        <button class="player-btn" onclick="stopAudio()">■</button>
+    </div>
+</div>
+
+<script>
+    const mAudio = document.getElementById('mini-audio');
+    const pBtn = document.getElementById('p-btn');
+    const mFill = document.getElementById('mini-fill');
+
+    function togglePlay() {
+        if (mAudio.paused) {
+            mAudio.play();
+            pBtn.innerHTML = 'Ⅱ';
+        } else {
+            mAudio.pause();
+            pBtn.innerHTML = '▶';
+        }
+    }
+
+    function stopAudio() {
+        mAudio.pause();
+        mAudio.currentTime = 0;
+        pBtn.innerHTML = '▶';
+    }
+
+    mAudio.addEventListener('timeupdate', () => {
+        if (mAudio.duration) {
+            const pct = (mAudio.currentTime / mAudio.duration) * 100;
+            mFill.style.width = pct + '%';
+        }
+    });
+
+    // Autoplay Bypass: Attempt to play on first user interaction
+    window.addEventListener('click', () => {
+        if (mAudio.paused && mAudio.currentTime === 0) {
+            mAudio.play();
+            pBtn.innerHTML = 'Ⅱ';
+        }
+    }, { once: true }); 
+</script>
+
+
+    
+
+
+
+
+    
 
     
 </html>
