@@ -370,13 +370,38 @@ document.onmouseup=reEnable
 
 
 
+<div style="
+    position: fixed; 
+    bottom: calc(20px + env(safe-area-inset-bottom)); 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 999999;
+    width: auto;">
 
+    <!-- Oval Kapsayıcı -->
+    <div style="
+        background: #000; 
+        width: 180px; 
+        height: 45px; 
+        border-radius: 50px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        border: 2px solid #ff0000; 
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        overflow: hidden;
+        padding: 0 5px;">
 
-
+        <!-- HTML5 Audio: Tarayıcının kendi mini oynatıcısını kırmızıya boyuyoruz -->
+        <audio controls autoplay style="
+            width: 160px; 
+            height: 30px; 
+            filter: invert(100%) hue-rotate(150deg) saturate(500%);
+            outline: none;">
+            <source src="SES_DOSYASI_URL_BURAYA.mp3" type="audio/mpeg">
+        </audio>
     </div>
 </div>
-
-
 
 
 
