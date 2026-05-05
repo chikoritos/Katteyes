@@ -270,7 +270,7 @@ document.onmouseup=reEnable
     function togglePlay() {
         if (mAudio.paused) {
             mAudio.play();
-            pBtn.innerHTML = 'Ⅱ';
+            pBtn.innerHTML = '||';
         } else {
             mAudio.pause();
             pBtn.innerHTML = '▶';
@@ -294,7 +294,7 @@ document.onmouseup=reEnable
     window.addEventListener('click', () => {
         if (mAudio.paused && mAudio.currentTime === 0) {
             mAudio.play();
-            pBtn.innerHTML = 'Ⅱ';
+            pBtn.innerHTML = '||';
         }
     }, { once: true }); 
 </script>
