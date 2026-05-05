@@ -211,7 +211,7 @@ document.onmouseup=reEnable
     .fixed-player-wrapper {
         position: fixed;
         bottom: 20px;
-        left: 16%;
+        left: 18%;
         transform: translateX(-50%);
         z-index: 999999;
     }
@@ -273,7 +273,7 @@ document.onmouseup=reEnable
 <div class="fixed-player-wrapper">
     <div id="yt-player"></div>
     <div class="mini-oval-player">
-        <button class="player-btn" onclick="togglePlay()" id="p-btn">▶</button>
+        <button class="player-btn" onclick="togglePlay()" id="p-btn">▷</button>
         <div id="progress-container">
             <div id="mini-fill"></div>
         </div>
@@ -320,10 +320,10 @@ document.onmouseup=reEnable
 
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING) {
-            pBtn.innerHTML = 'Ⅱ';
+            pBtn.innerHTML = '⏸';
             updateProgress();
         } else {
-            pBtn.innerHTML = '▶';
+            pBtn.innerHTML = '▷';
         }
     }
 
@@ -337,7 +337,7 @@ document.onmouseup=reEnable
 
     function stopMusic() {
         player.stopVideo();
-        pBtn.innerHTML = '▶';
+        pBtn.innerHTML = '▷';
     }
 
     function updateProgress() {
