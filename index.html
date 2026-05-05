@@ -198,7 +198,6 @@ document.onmouseup=reEnable
 <body onkeydown="return false">
 
 <style>
-    /* Fixed Positioning to bypass body restrictions */
     .fixed-player-wrapper {
         position: fixed;
         bottom: 20px;
@@ -209,14 +208,14 @@ document.onmouseup=reEnable
 
     .mini-oval-player {
         background: #111;
-        width: 160px; /* Slightly smaller for a true 'mini' feel */
+        width: 160px;
         height: 40px;
         border-radius: 40px;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
         border: 1px solid #ff0000;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7), inset 0 0 5px rgba(255, 0, 0, 0.2);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
         padding: 0 10px;
     }
 
@@ -227,76 +226,102 @@ document.onmouseup=reEnable
         cursor: pointer;
         font-size: 16px;
         text-shadow: 0 0 8px #ff0000;
-        transition: transform 0.2s, text-shadow 0.2s;
+        transition: 0.2s;
         outline: none;
     }
 
-    .player-btn:hover { 
-        transform: scale(1.2); 
-        text-shadow: 0 0 12px #ff0000;
-    }
+    .player-btn:hover { transform: scale(1.2); }
 
-    #mini-progress {
-        width: 30px;
-        height: 2px;
-        background: #333;
-        border-radius: 2px;
-    }
-
-    #mini-fill {
-        width: 0%;
-        height: 100%;
-        background: #f00;
-        box-shadow: 0 0 5px #f00;
+    /* YouTube iframe'ini gizlemek için */
+    #yt-hidden-player {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
     }
 </style>
 
 <div class="fixed-player-wrapper">
+    <!-- YouTube Oynatıcı Buraya Yüklenecek -->
+    <div id="yt-hidden-player"></div>
+
     <div class="mini-oval-player">
-        <!-- Added 'autoplay' attribute here -->
-        <audio id="mini-audio" src="https://www.youtube.com/watch?v=X4jxc5Dz1zM&list=RDX4jxc5Dz1zM&start_radio=1" autoplay></audio>
-        
-        <button class="player-btn" onclick="togglePlay()" id="p-btn">Ⅱ</button>
-        <div id="mini-progress"><div id="mini-fill"></div></div>
-        <button class="player-btn" onclick="stopAudio()">■</button>
+        <button class="player-btn" onclick="toggleYT()" id="p-btn">▶</button>
+        <div style="width: 30px; height: 2px; background: #333; border-radius: 2px;">
+            <div id="mini-fill" style="width: 0%; height: 100%; background: #f00;"></div>
+        </div>
+        <button class="player-btn" onclick="stopYT()">■</button>
     </div>
 </div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-    const mAudio = document.getElementById('mini-audio');
+    let player;
     const pBtn = document.getElementById('p-btn');
     const mFill = document.getElementById('mini-fill');
 
-    function togglePlay() {
-        if (mAudio.paused) {
-            mAudio.play();
-            pBtn.innerHTML = '||';
+    // YouTube API hazır olduğunda çalışır
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('yt-hidden-player', {
+            height: '1',
+            width: '1',
+            videoId: 'dQw4w9WgXcQ', // BURAYA YOUTUBE VIDEO ID'SINI YAZ (Örn: dQw4w9WgXcQ)
+            playerVars: {
+                'autoplay': 1,
+                'controls': 0
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Tarayıcı engeli nedeniyle genelde kullanıcı tıklamadan başlamaz
+        // Ama biz yine de deniyoruz
+        event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+            pBtn.innerHTML = 'Ⅱ';
+            updateProgress();
         } else {
-            mAudio.pause();
             pBtn.innerHTML = '▶';
         }
     }
 
-    function stopAudio() {
-        mAudio.pause();
-        mAudio.currentTime = 0;
+    function toggleYT() {
+        const state = player.getPlayerState();
+        if (state == YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    }
+
+    function stopYT() {
+        player.stopVideo();
         pBtn.innerHTML = '▶';
     }
 
-    mAudio.addEventListener('timeupdate', () => {
-        if (mAudio.duration) {
-            const pct = (mAudio.currentTime / mAudio.duration) * 100;
-            mFill.style.width = pct + '%';
-        }
-    });
+    function updateProgress() {
+        setInterval(() => {
+            if (player && player.getCurrentTime) {
+                const pct = (player.getCurrentTime() / player.getDuration()) * 100;
+                mFill.style.width = pct + '%';
+            }
+        }, 1000);
+    }
 
-    // Autoplay Bypass: Attempt to play on first user interaction
+    // Sayfaya ilk tıklamada çalması için (Autoplay koruması için)
     window.addEventListener('click', () => {
-        if (mAudio.paused && mAudio.currentTime === 0) {
-            mAudio.play();
-            pBtn.innerHTML = '||';
+        if (player && player.getPlayerState() !== YT.PlayerState.PLAYING) {
+            player.playVideo();
         }
-    }, { once: true }); 
+    }, { once: true });
 </script>
 
 
