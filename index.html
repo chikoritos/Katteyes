@@ -203,53 +203,55 @@ document.onmouseup=reEnable
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 9999;
+        z-index: 99999;
     }
 
     .mini-oval-player {
-        background: #111;
+        background: #000;
         width: 160px;
         height: 40px;
         border-radius: 40px;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
-        border: 1px solid #ff0000;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        border: 2px solid #ff0000;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
         padding: 0 10px;
+        cursor: pointer;
     }
 
     .player-btn {
         background: none;
         border: none;
         color: #ff0000;
+        font-size: 18px;
+        text-shadow: 0 0 10px #ff0000;
         cursor: pointer;
-        font-size: 16px;
-        text-shadow: 0 0 8px #ff0000;
-        transition: 0.2s;
         outline: none;
     }
 
-    .player-btn:hover { transform: scale(1.2); }
+    #mini-fill {
+        width: 0%;
+        height: 100%;
+        background: #f00;
+        box-shadow: 0 0 8px #f00;
+        transition: width 0.5s;
+    }
 
-    /* YouTube iframe'ini gizlemek için */
+    /* Video görünmesin */
     #yt-hidden-player {
         position: absolute;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-        pointer-events: none;
+        top: -9999px;
+        left: -9999px;
     }
 </style>
 
 <div class="fixed-player-wrapper">
-    <!-- YouTube Oynatıcı Buraya Yüklenecek -->
     <div id="yt-hidden-player"></div>
-
-    <div class="mini-oval-player">
-        <button class="player-btn" onclick="toggleYT()" id="p-btn">▶</button>
-        <div style="width: 30px; height: 2px; background: #333; border-radius: 2px;">
-            <div id="mini-fill" style="width: 0%; height: 100%; background: #f00;"></div>
+    <div class="mini-oval-player" id="player-container">
+        <button class="player-btn" id="p-btn">▶</button>
+        <div style="width: 40px; height: 3px; background: #222; border-radius: 5px; overflow: hidden;">
+            <div id="mini-fill"></div>
         </div>
         <button class="player-btn" onclick="stopYT()">■</button>
     </div>
@@ -259,17 +261,19 @@ document.onmouseup=reEnable
 <script>
     let player;
     const pBtn = document.getElementById('p-btn');
+    const container = document.getElementById('player-container');
     const mFill = document.getElementById('mini-fill');
 
-    // YouTube API hazır olduğunda çalışır
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('yt-hidden-player', {
             height: '1',
             width: '1',
-            videoId: 'X4jxc5Dz1zM', // BURAYA YOUTUBE VIDEO ID'SINI YAZ (Örn: dQw4w9WgXcQ)
+            videoId: 'X4jxc5Dz1zM', // Kendi Video ID'ni buraya yaz
             playerVars: {
                 'autoplay': 1,
-                'controls': 0
+                'mute': 0,
+                'controls': 0,
+                'origin': window.location.origin
             },
             events: {
                 'onReady': onPlayerReady,
@@ -279,32 +283,31 @@ document.onmouseup=reEnable
     }
 
     function onPlayerReady(event) {
-        // Tarayıcı engeli nedeniyle genelde kullanıcı tıklamadan başlamaz
-        // Ama biz yine de deniyoruz
+        // Otomatik başlatmayı dene (genelde bloklanır)
         event.target.playVideo();
+        updateProgress();
     }
 
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING) {
             pBtn.innerHTML = 'Ⅱ';
-            updateProgress();
         } else {
             pBtn.innerHTML = '▶';
         }
     }
 
-    function toggleYT() {
+    // Oynat/Duraklat fonksiyonu
+    container.addEventListener('click', function() {
         const state = player.getPlayerState();
         if (state == YT.PlayerState.PLAYING) {
             player.pauseVideo();
         } else {
             player.playVideo();
         }
-    }
+    });
 
     function stopYT() {
         player.stopVideo();
-        pBtn.innerHTML = '▶';
     }
 
     function updateProgress() {
@@ -316,14 +319,13 @@ document.onmouseup=reEnable
         }, 1000);
     }
 
-    // Sayfaya ilk tıklamada çalması için (Autoplay koruması için)
-    window.addEventListener('click', () => {
+    // KRİTİK ÇÖZÜM: Kullanıcı sayfanın herhangi bir yerine tıkladığı an çalıştır
+    document.addEventListener('click', function() {
         if (player && player.getPlayerState() !== YT.PlayerState.PLAYING) {
             player.playVideo();
         }
-    }, { once: true });
+    }, { once: true }); // Sadece ilk tık için çalışır
 </script>
-
 
     
 
