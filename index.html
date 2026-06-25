@@ -68,89 +68,7 @@
 			border-color: #f472b6;
         }
 
-        /* --- CUTE TOOLBAR (BUTON) --- */
-        .cute-button-container {
-            position: absolute;
-            top: 3%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-
-        .cute-card-btn {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.8);
-            border: 6px solid #d8b4fe;
-            border-radius: 30px; /* Shape change, change oval*/
-            padding: 10px 20px; /* Size Change Inner shape*/
-            text-decoration: none;
-            color: #6b21a8;
-            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.15);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .cute-card-btn .avatar {
-            width: 65px;
-            height: 65px;
-            border-radius: 14px;
-            margin-right: 15px;
-            object-fit: cover;
-            border: 3px solid #c084fc;
-        }
         
-
-        .cute-card-btn .avatar:hover {
-            transform: translateY(2px) scale(1.02);
-            box-shadow: 0 0 25px rgba(232, 121, 249, 0.5);
-            background: rgba(255, 255, 255, 0.9);
-            border-color: #f472b6;
-        }
-
-
-
-		
-
-        .cute-card-btn .text-info {
-            display: flex;
-            flex-direction: column;
-            margin-right: 20px;
-        }
-
-        .cute-card-btn .title {
-            font-weight: bold;
-            font-size: 22px;
-            color: #581c87;
-        }
-
-        .cute-card-btn .desc {
-            font-size: 11px;
-            color: #701a75;
-            opacity: 0.8;
-        }
-
-        .cute-card-btn .click-badge {
-            background: #a855f7;
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-		
-
-        .cute-card-btn:hover {
-            transform: translateY(2px) scale(1.02);
-            box-shadow: 0 0 25px rgba(232, 121, 249, 0.5);
-            background: rgba(255, 255, 255, 0.9);
-            border-color: #f472b6;
-        }
-
-        .cute-card-btn:active {
-            transform: translateY(4px) scale(0.98);
-        }
 
         /* --- MIDDLE WINDOWS--- */
         .page-overlay {
@@ -181,7 +99,7 @@
             -webkit-backdrop-filter: blur(20px);
             width: 70%;
             max-width: 800px;
-            height: 65vh;
+            height: 75vh;
             border-radius: 24px;
             border: 2px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
@@ -364,12 +282,98 @@
             .center-window { width: 90%; height: 55vh; }
             .cute-card-btn .desc { display: none; }
         }
+
+/* --- CUTE TOOLBAR (BUTON) --- */
+        .cute-button-container {
+            position: absolute;
+            top: 1%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .cute-card-btn {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            border: 6px solid #d8b4fe;
+            border-radius: 30px; /* Shape change, change oval*/
+            padding: 10px 20px; /* Size Change Inner shape*/
+            text-decoration: none;
+            color: #6b21a8;
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cute-card-btn .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 14px;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid #c084fc;
+        }
+        
+
+        .cute-card-btn .avatar:hover {
+            transform: translateY(2px) scale(1.02);
+            box-shadow: 0 0 25px rgba(232, 121, 249, 0.5);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #f472b6;
+        }
+
+
+
+		
+
+        .cute-card-btn .text-info {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+
+        .cute-card-btn .title {
+            font-weight: bold;
+            font-size: 22px;
+            color: #581c87;
+        }
+
+        .cute-card-btn .desc {
+            font-size: 11px;
+            color: #701a75;
+            opacity: 0.8;
+        }
+
+        .cute-card-btn .click-badge {
+            background: #a855f7;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+		
+
+        .cute-card-btn:hover {
+            transform: translateY(2px) scale(1.02);
+            box-shadow: 0 0 25px rgba(232, 121, 249, 0.5);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #f472b6;
+        }
+
+        .cute-card-btn:active {
+            transform: translateY(4px) scale(0.98);
+        }
+
+
     </style>
 </head>
 <body>
 
     <div class="cute-button-container">
-        <a href="#" target="_blank" class="cute-card-btn">
+        <a onclick="closeAllWindows()" class="cute-card-btn">
             <img src="https://xatimg.com/image/kLxuG60ryiTw.png" alt="Hinata" class="avatar">
             <div class="text-info">
                 <span class="title">Cute</span>
